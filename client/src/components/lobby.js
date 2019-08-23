@@ -1,19 +1,21 @@
-import React, { Component } from "react";
+import React from "react";
 import Title from "./title";
-import Cards from "./cards";
 import Users from "./users";
+import SocketContext from './socketContext';
+import * as io from "socket.io-client";
 
-class Lobby extends Component {
+const socket = io("http://localhost:3001/")
 
-    render() {
+function Lobby() {
+
         return (
             <div>
                 <Title />
+                <SocketContext.Provider value={socket}>
                 <Users />
-                <Cards />
+                </SocketContext.Provider>
             </div>
         );
     };
-};
 
 export default Lobby;

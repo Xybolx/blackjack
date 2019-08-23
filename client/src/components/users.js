@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import io from "socket.io-client";
+import SocketContext from './socketContext';
 import API from "../utils/API";
 
 class Users extends Component {
@@ -16,31 +16,27 @@ class Users extends Component {
             fullRoom: ""
         };
 
-        // initiate socket
-        this.socket = io("http://localhost:3001/");
-
         // socket connect/disconnect events
-        this.socket.on('connect', () => {
-            let id = this.socket.io.engine.id;
+        this.props.socket.on('connect', () => {
+            let id = this.props.socket.io.engine.id;
             console.log(id);
         });
 
-        this.socket.on('disconnect', () => {
+        this.props.socket.on('disconnect', () => {
             this.logOut();
         });
 
         // socket receive events from server
-        this.socket.on("RECEIVE_USER", data => {
+        this.props.socket.on("RECEIVE_USER", data => {
             if (data) {
                 this.setState({ joiningUser: data.user.username });
-                this.loadUsers();
                 console.log("firing");
             }
             clearTimeout(this.userjoinTimeout);
             this.userJoinTimeout = setTimeout(this.userJoiningTimeout, 4000);
         });
 
-        this.socket.on("RECEIVE_USER_LEFT", data => {
+        this.props.socket.on("RECEIVE_USER_LEFT", data => {
             if (data) {
                 this.setState({ leavingUser: data.user.username });
             }
@@ -48,7 +44,7 @@ class Users extends Component {
             this.userLeftTimeout = setTimeout(this.userLeavingTimeout, 4000);
         });
 
-        this.socket.on("RECEIVE_ROOM_NUMBER", data => {
+        this.props.socket.on("RECEIVE_ROOM_NUMBER", data => {
             if (data) {
                 console.log(data.users);
                 this.setState({ room: data.users });
@@ -68,8 +64,8 @@ class Users extends Component {
     // API calls
     loadUser = () => {
         API.getUser()
-            .then(res =>
-                this.setState({ user: res.data }))
+            .then(res => this.setState({ user: res.data }))
+            .then(() => this.sendUser())
             .catch(err => console.log(err))
     };
 
@@ -89,11 +85,11 @@ class Users extends Component {
 
     // socket send events
     sendUser = () => {
-        this.socket.emit("SEND_USER", {
+        this.props.socket.emit("SEND_USER", {
             user: this.state.user
         });
 
-        this.socket.emit("SEND_ROOM_NUMBER", {
+        this.props.socket.emit("SEND_ROOM_NUMBER", {
             user: this.state.user,
             users: this.state.users,
             roomNumber: this.state.roomNumber
@@ -101,7 +97,7 @@ class Users extends Component {
     };
 
     sendUserLeft = () => {
-        this.socket.emit("SEND_USER_LEFT", {
+        this.props.socket.emit("SEND_USER_LEFT", {
             user: this.state.user,
             roomNumber: this.state.roomNumber
         });
@@ -119,12 +115,10 @@ class Users extends Component {
     componentDidMount() {
         this.loadUsers();
         this.loadUser();
-        this.handleSendUserTimeout = setTimeout(this.sendUser, 5000);
     };
 
     componentWillUnmount() {
         clearTimeout(this.userLeftTimeout);
-        clearTimeout(this.handleSendUserTimeout);
     };
 
     render() {
@@ -172,4 +166,10 @@ class Users extends Component {
     };
 };
 
-export default Users;
+const UsersWithSocket = props => (
+    <SocketContext.Consumer>
+        {socket => <Users {...props} socket = {socket} />}
+    </SocketContext.Consumer>
+);
+
+export default UsersWithSocket;
