@@ -1,13 +1,16 @@
-import React, { Component } from "react";
+import React from "react";
+import "./title.css";
 
-class Title extends Component {
-    
-    render() {
+const Title = () => {
 
-        return (
-            <h1 id="title">M.E.R.N<div>Blackjack</div></h1>
-        );
-    };
+    return (
+        <div>
+            <h1 id="title">
+                React
+                <div className="title">Black Jack</div>
+            </h1>
+        </div>
+    );
 };
 
 export default Title;

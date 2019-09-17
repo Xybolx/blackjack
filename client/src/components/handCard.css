@@ -1,0 +1,21 @@
+@keyframes FadeIn {
+  from {
+    opacity: .2;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.hand-card {
+  cursor: pointer;
+  width: 125px;
+  height: 175px;
+  position: relative;
+  animation: FadeIn 2s;
+}
+
+.img-fluid {
+  width: 125px;
+  height: 175px;
+}

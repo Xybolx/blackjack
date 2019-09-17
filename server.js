@@ -24,8 +24,9 @@ if (process.env.NODE_ENV === "production") {
     app.use(express.static("client/build"));
 }
 
-// static directory
+// static directories
 app.use(express.static("client/src/imgs"));
+
 
 // session stuff
 app.use(session({ secret: "keyboard cat", resave: true, saveUninitialized: true }));

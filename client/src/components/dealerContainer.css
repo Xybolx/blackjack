@@ -1,0 +1,11 @@
+.dealer {
+  background: url("../imgs/table.png") !important;
+  background-size: 100% 100% !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+}
+
+.info-count {
+  height: 300px;
+  overflow-y: auto;
+}

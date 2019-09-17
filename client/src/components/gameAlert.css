@@ -1,0 +1,108 @@
+@keyframes Pop {
+  from {
+    font-size: 0px;
+  }
+  to {
+    font-size: 70px;
+    transform: rotateX(360deg);
+  }
+}
+
+@keyframes FlashWin {
+  from {
+    color: rgb(42, 172, 96);
+  }
+  to {
+    color: gold;
+  }
+}
+
+@keyframes FlashLose {
+  from {
+    color: tomato;
+  }
+  to {
+    color: gold;
+  }
+}
+
+@keyframes FlashHello {
+  from {
+    color: gold;
+  }
+  to {
+    color: dodgerblue;
+  }
+}
+
+@keyframes Crack {
+from {
+  /* background: url("../imgs/panel.png");
+  background-size: 500px;
+  background-repeat: no-repeat;
+  background-position: center; */
+  }
+to {
+  background: url("../imgs/glass2.gif");
+  background-size: 500px;
+  background-repeat: no-repeat;
+  background-position: center;
+  }
+}
+
+.game-alert {
+  /* background: url("https://www.searchpng.com/wp-content/uploads/2018/12/cracked-Glass-715x473.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center; */
+  /* animation: Crack 10s both; */
+  /* animation: Pop 1.8s 2.25 alternate; */
+  z-index: 10;
+
+}
+
+.insideAlert {
+  font-size: 70px;
+  animation: Pop 1.8s 2.25 alternate;
+  height: 100%;
+  mix-blend-mode: difference;
+  opacity: .7;
+}
+
+.alert-success {
+  /* background: transparent !important;
+  background-size: contain !important;
+  background-repeat: no-repeat; */
+  border: solid transparent !important;
+  color: rgba(255, 255, 255, 0.87) !important;
+  font-size: 70px;
+  font-family: fantasy;  
+  text-shadow: 2px 1px 1px rgba(249, 253, 1, 0.952);
+  animation: FlashWin .25s infinite ease-in-out !important;
+  margin-bottom: 5px;
+  z-index: 0;
+}
+
+.alert-danger {
+  background: transparent !important;
+  background-size: contain !important;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  border: solid transparent !important;
+  color: rgba(255, 99, 71, 0.219) !important;
+  font-size: 70px;
+  font-family: fantasy;  
+  text-shadow: 2px 1px 1px whitesmoke;
+  animation: FlashLose .25s infinite ease-in-out !important;
+}
+
+.alert-warning {
+  background: transparent !important;
+  border: solid transparent !important;
+  color: gold !important;
+  font-size: 70px;
+  font-family: fantasy;  
+  text-shadow: 2px 1px 1px whitesmoke;
+  animation: FlashHello .25s infinite ease-in-out !important;
+  z-index: 0;
+}

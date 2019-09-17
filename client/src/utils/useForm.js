@@ -8,7 +8,8 @@ const useForm = () => {
     // handle change
     const handleChange = ev => {
         ev.persist();
-        setState(state => ({ ...state, [ev.target.name]: ev.target.value }))
+        const {name, value} = ev.target;
+        setState(state => ({ ...state, [name]: value }))
     };
 
     // handle clear form

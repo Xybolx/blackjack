@@ -1,0 +1,14 @@
+#title {
+  background: url("../imgs/card-hand.png");
+  background-size: contain;
+  background-repeat: repeat-y;
+  background-position: center;
+  background-blend-mode: color;
+  color:rgba(245, 245, 245, 0.986);
+  font-family: fantasy;  
+  text-shadow: 1px 2px 1px tomato;
+}
+
+.title {
+  /* font-size: 50px; */
+}

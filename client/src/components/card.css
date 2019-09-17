@@ -1,0 +1,13 @@
+.playing-card {
+  cursor: grab;
+  width: 150px;
+  height: 200px;
+  position: absolute;
+  right: 55%;
+  z-index: 15;
+}
+
+.img-fluid {
+  width: 150px;
+  height: 200px;
+}
